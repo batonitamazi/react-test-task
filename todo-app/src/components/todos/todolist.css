@@ -1,0 +1,74 @@
+.todo--list {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: var(--card-color);
+}
+.bottom-buttons {
+    padding-left: 10px;
+    padding-right: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.item--counter {
+    font-size: 14px;
+    color: var(--paragraph-color);
+}
+.button-group {
+    width: 30%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.filter--button {
+    background: none;
+    font-size: 14px;
+    color: var(--paragraph-color);
+    border: none;
+    padding: 0px;
+    font-family: 'Josefin sans';
+}
+.active {
+    color: var(--text-blue);
+}
+.todo--list--container{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    overflow-y:scroll; 
+}
+.todo--card {
+    width: 90%;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: flex-start;   
+    color: var(--font-color);
+}
+.todos--list--container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;   
+    height: 64px;
+    border-bottom: 1px solid var(--border-color);
+
+}
+.checkbox--todo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 15px;
+  width: 24px;
+  height: 24px;
+  border: 1px solid var(--border-color);
+  cursor: pointer;
+  border-radius: 50%;
+}
+.checkbox--todo:hover {
+    background-image: linear-gradient(#55DDFF, #C058F3);
+}
