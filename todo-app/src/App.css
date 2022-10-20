@@ -11,6 +11,7 @@
   --card-color: #FFFFFF;
   --deleted-item: #D1D2DA;
   --border-color: #E3E4F1;
+  --deleted-text: #D1D2DA;
 }
 
 
@@ -21,7 +22,9 @@
   --placeholder-color: #767992;
   --card-color: #25273D;
   --deleted-item: #4D5067;
-  --border-color: #393A4B
+  --border-color: #393A4B;
+  --deleted-text: #4D5067;
+
 }
 
 body {
@@ -85,3 +88,4 @@ body {
   width: 100%;
   height: 80%;
 }
+

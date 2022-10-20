@@ -14,13 +14,11 @@ const buttons = [
     },
 ]
 
-function TodoLists({ todos, handleDeleteTodo }) {
+function TodoLists({ todos, handleDeleteTodo, handleComplete }) {
     const [active, setActive] = useState(null)
     const handleClick = (e) => {
         setActive(e.target.value)
     }
-    
-
 
     return (
         <div className='todo--list'>
@@ -29,11 +27,12 @@ function TodoLists({ todos, handleDeleteTodo }) {
                     return (
                         <div className='todos--list--container' key={index}>
                             <div className='todo--card'>
-                                <div className="checkbox--todo" type='checkbox'>
+                                <div className={todo.isDone ? "checkbox--todo completed--todo" : "checkbox--todo"} type='checkbox' onClick={handleComplete} id={index}>
+                                    {todo.isDone && <img src='/images/icon-check.svg' alt='check' id={index} className='check--img'/>}
                                 </div>
-                                <span className='todo--text'>{todo.text}</span>
+                                <span className={todo.isDone ? 'todo--text todo--text--completed': 'todo--text'}>{todo.text}</span>
                             </div>
-                            <img  src='images/icon-cross.svg' alt='delete' id={Number(todo.id)} onClick={handleDeleteTodo}/>
+                            <img className='delete--icon' src='images/icon-cross.svg' alt='delete' id={Number(todo.id)} onClick={handleDeleteTodo} />
                         </div>
                     )
                 })}
@@ -45,10 +44,17 @@ function TodoLists({ todos, handleDeleteTodo }) {
                 <div className='button-group'>
                     {buttons.map((btn, index) => {
                         return (
-                            <button onClick={handleClick} value={btn.name} className={active === btn.name ? 'filter--button active' : 'filter--button'} id="all" key={index}>{btn.name}</button>
+                            <button
+                                onClick={handleClick}
+                                value={btn.name}
+                                className={active === btn.name ? 'filter--button active' : 'filter--button'}
+                                id="all"
+                                key={index}
+                            >
+                                {btn.name}
+                            </button>
                         )
                     })}
-
                 </div>
                 <button onClick={handleClick} id='clear' className={active ? 'filter--button active' : 'filter--button'}>
                     Clear Completed

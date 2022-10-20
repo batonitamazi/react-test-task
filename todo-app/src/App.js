@@ -21,7 +21,10 @@ function App() {
     setTodos(newTodos);
   }
   const handleComplete = (e) => {
-    // const newTodos =  
+    const newTodos = [...todos];
+    console.log(e.target.id)
+    newTodos[e.target.id].isDone = !todos[e.target.id].isDone;
+    setTodos(newTodos);
   }
   return (
     <div className='main--container'>
@@ -37,7 +40,11 @@ function App() {
           <TodoInput handleAddTodo={handleAddTodo} />
           {todos.length > 0 && (
 
-            <TodoLists todos={todos} handleDeleteTodo={handleDeleteTodo} />
+            <TodoLists
+              todos={todos}
+              handleDeleteTodo={handleDeleteTodo}
+              handleComplete={handleComplete}
+            />
           )}
         </div>
       </div>
