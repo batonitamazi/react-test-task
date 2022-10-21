@@ -6,10 +6,7 @@ import TodoLists from './components/todos/TodoLists';
 
 
 function App() {
-  const [todos, setTodos] = useState([
-
-
-  ])
+  const [todos, setTodos] = useState([])
   const { changeTheme, theme } = useContext(themeContext)
   const unique = () => parseInt(Date.now() * Math.random())
   const handleAddTodo = (text) => {
@@ -17,7 +14,7 @@ function App() {
     setTodos(newTodoList)
   }
   const handleDeleteTodo = (e) => {
-    const newTodos = todos.filter((todo) => { return (todo.id != e.target.id) });
+    const newTodos = todos.filter((todo) => { return (todo.id !=   e.target.id) });
     setTodos(newTodos);
   }
   const handleComplete = (e) => {
@@ -26,6 +23,14 @@ function App() {
     newTodos[e.target.id].isDone = !todos[e.target.id].isDone;
     setTodos(newTodos);
   }
+  const clearCompleted = (e) => {
+    console.log('saosda')
+    const newTodos = todos.filter((todo) => {return (todo.isDone != true)})
+    console.log(newTodos)
+    setTodos(newTodos);
+  }
+  
+  
   return (
     <div className='main--container'>
       <img src={theme === "dark" ? '/images/bg-desktop-dark.jpg' : '/images/bg-desktop-light.jpg'} className='background--image' alt='background' id='bg-img' />
@@ -44,6 +49,7 @@ function App() {
               todos={todos}
               handleDeleteTodo={handleDeleteTodo}
               handleComplete={handleComplete}
+              clearCompleted={clearCompleted}
             />
           )}
         </div>
