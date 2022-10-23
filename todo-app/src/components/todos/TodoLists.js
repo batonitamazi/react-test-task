@@ -1,27 +1,22 @@
-import React, { useState } from 'react'
+import React from 'react'
 import './todolist.css';
 
+const buttons = [
+    {
+        name: 'All',
+    },
+    {
+        name: 'Actives',
+        
+    },
+    {
+        name: 'Completed',
+
+    },
+]
 
 
-
-function TodoLists({ todos, filteredArray,  handleDeleteTodo, handleComplete, clearCompleted, handleFilterTodos}) {
-    const [active, setActive] = useState(null)
-    const handleClick = (e) => {
-        setActive(e.target.value)
-    }
-    const buttons = [
-        {
-            name: 'All',
-        },
-        {
-            name: 'Actives',
-            
-        },
-        {
-            name: 'Completed',
-
-        },
-    ]
+function TodoLists({ todos, filteredArray,  handleDeleteTodo, handleComplete, clearCompleted, handleFilterTodos, active}) {
 
     return (
         <div className='todo--list'>
@@ -48,7 +43,7 @@ function TodoLists({ todos, filteredArray,  handleDeleteTodo, handleComplete, cl
                     {buttons.map((btn, index) => {
                         return (
                             <button
-                                onClick={() => handleFilterTodos(btn.name)}
+                                onClick={(e) => handleFilterTodos(e, btn.name)}
                                 value={btn.name}
                                 className={active === btn.name ? 'filter--button active' : 'filter--button'}
                                 id="all"

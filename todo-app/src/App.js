@@ -8,6 +8,8 @@ import TodoLists from './components/todos/TodoLists';
 function App() {
   const [todos, setTodos] = useState([])
   const [filteredArray, setFilteredArray] = useState([])
+  const [active, setActive] = useState(null)
+
   const { changeTheme, theme } = useContext(themeContext)
   const unique = () => parseInt(Date.now() * Math.random())
 
@@ -29,12 +31,15 @@ function App() {
     const newTodos = todos.filter((todo) => {return (todo.isDone !== true)})
     setTodos(newTodos);
   }
-  const handleFilterTodos = (filter) => {
+  const handleFilterTodos = (e, filter) => {
     if(filter === 'All'){
+      setActive(filter)
       return setFilteredArray(todos);
     }else if(filter === 'Completed'){
+      setActive(filter)
       return setFilteredArray(todos.filter((todo) => {return (todo.isDone !== false)}));
     }else if(filter === 'Actives'){
+      setActive(filter)
       return setFilteredArray(todos.filter((todo) => {return (todo.isDone !== true)}))
     }
     return todos;
@@ -42,6 +47,7 @@ function App() {
   
   useEffect(() => {
     setFilteredArray(todos);
+    setActive(null);
   }, [todos])
   return (
     <div className='main--container'>
@@ -59,6 +65,7 @@ function App() {
 
             <TodoLists
               todos={todos}
+              active={active}
               filteredArray={filteredArray}
               handleDeleteTodo={handleDeleteTodo}
               handleComplete={handleComplete}
