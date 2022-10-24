@@ -9,6 +9,7 @@ function App() {
   const [todos, setTodos] = useState([])
   const [filteredArray, setFilteredArray] = useState([])
   const [active, setActive] = useState(null)
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   const { changeTheme, theme } = useContext(themeContext)
   const unique = () => parseInt(Date.now() * Math.random())
@@ -18,7 +19,7 @@ function App() {
     setTodos(newTodoList)
   }
   const handleDeleteTodo = (e) => {
-    const newTodos = todos.filter((todo) => { return (Number(todo.id) !== Number(e.target.id))});
+    const newTodos = todos.filter((todo) => { return (Number(todo.id) !== Number(e.target.id)) });
     setTodos(newTodos);
   }
   const handleComplete = (e) => {
@@ -28,30 +29,39 @@ function App() {
     setTodos(newTodos);
   }
   const clearCompleted = (e) => {
-    const newTodos = todos.filter((todo) => {return (todo.isDone !== true)})
+    const newTodos = todos.filter((todo) => { return (todo.isDone !== true) })
     setTodos(newTodos);
   }
   const handleFilterTodos = (e, filter) => {
-    if(filter === 'All'){
+    if (filter === 'All') {
       setActive(filter)
       return setFilteredArray(todos);
-    }else if(filter === 'Completed'){
+    } else if (filter === 'Completed') {
       setActive(filter)
-      return setFilteredArray(todos.filter((todo) => {return (todo.isDone !== false)}));
-    }else if(filter === 'Actives'){
+      return setFilteredArray(todos.filter((todo) => { return (todo.isDone !== false) }));
+    } else if (filter === 'Actives') {
       setActive(filter)
-      return setFilteredArray(todos.filter((todo) => {return (todo.isDone !== true)}))
+      return setFilteredArray(todos.filter((todo) => { return (todo.isDone !== true) }))
     }
     return todos;
   }
-  
+
   useEffect(() => {
     setFilteredArray(todos);
     setActive(null);
   }, [todos])
+
+  
+
+
   return (
     <div className='main--container'>
-      <img src={theme === "dark" ? '/images/bg-desktop-dark.jpg' : '/images/bg-desktop-light.jpg'} className='background--image' alt='background' id='bg-img' />
+      {windowWidth > 700 ? (
+        <img src={theme === "dark" ? '/images/bg-desktop-dark.jpg' : '/images/bg-desktop-light.jpg'} className='background--image' alt='background' id='bg-img' />
+
+      ) : (
+        <img src={theme === "dark" ? '/images/bg-mobile-dark.jpg' : '/images/bg-mobile-light.jpg'} className='background--image' alt='background' id='bg-img' />
+      )}
       <div className='todo--container'>
         <div className='todo--header'>
           <h1 className='todo--title'>T O D O</h1>
