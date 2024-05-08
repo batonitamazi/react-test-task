@@ -1,15 +1,18 @@
 import "./App.css";
 import { useContext, useEffect, useState } from "react";
 import { themeContext } from "./providers/theme.provider";
-import TodoInput from "./components/todoInput/TodoInput";
 import TodoLists from "./components/todos/TodoLists";
 import TodoSearch from "./components/todosearch/TodoSearch";
+import AddNoteDialog from "./components/addnote/AddNoteDialog";
 
 function App() {
   const [todos, setTodos] = useState([]);
   const [filteredArray, setFilteredArray] = useState([]);
   const [active, setActive] = useState(null);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [open, setOpen] = useState(false);
+  const [editNote, setEditNote] = useState(null);
+
 
   const { changeTheme, theme } = useContext(themeContext);
   const unique = () => parseInt(Date.now() * Math.random());
@@ -18,45 +21,74 @@ function App() {
     const newTodoList = [...todos, { id: unique(), text, isDone: false }];
     setTodos(newTodoList);
   };
+
+
   const handleDeleteTodo = (e) => {
     const newTodos = todos.filter((todo) => {
       return Number(todo.id) !== Number(e.target.id);
     });
     setTodos(newTodos);
   };
+
+
   const handleComplete = (e) => {
     const newTodos = [...todos];
-    console.log(e.target.id);
     newTodos[e.target.id].isDone = !todos[e.target.id].isDone;
     setTodos(newTodos);
   };
-  const clearCompleted = (e) => {
-    const newTodos = todos.filter((todo) => {
-      return todo.isDone !== true;
-    });
-    setTodos(newTodos);
-  };
-  const handleFilterTodos = (e, filter) => {
+
+
+  const handleFilterTodos = (filter) => {
     if (filter === "All") {
       setActive(filter);
-      return setFilteredArray(todos);
+      setFilteredArray(todos);
     } else if (filter === "Completed") {
       setActive(filter);
-      return setFilteredArray(
-        todos.filter((todo) => {
-          return todo.isDone !== false;
-        })
-      );
+      setFilteredArray(todos.filter((todo) => todo.isDone));
     } else if (filter === "Actives") {
       setActive(filter);
-      return setFilteredArray(
-        todos.filter((todo) => {
-          return todo.isDone !== true;
-        })
-      );
+      setFilteredArray(todos.filter((todo) => !todo.isDone));
     }
-    return todos;
   };
+
+  const handleEditOpen = (todoId) => {
+    const todoToEdit = todos.find(todo => Number(todo.id) === Number(todoId));
+    setOpen(true);
+    setEditNote(todoToEdit);
+  };
+
+  const handleEditTodo = (editedTodo, id) => {
+    const updatedTodos = todos.map(todo => {
+      if (todo.id === id) {
+        return { ...todo, text: editedTodo };
+      }
+      return todo;
+    });
+    setTodos(updatedTodos);
+    setOpen(false);
+    setEditNote(null);
+  };
+
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleSearch = (searchText) => {
+    if (!searchText) {
+      setFilteredArray(todos);
+    } else {
+      const filteredTodos = todos.filter((todo) =>
+        todo.text.toLowerCase().includes(searchText.toLowerCase())
+      );
+      setFilteredArray(filteredTodos);
+    }
+  };
+
 
   useEffect(() => {
     setFilteredArray(todos);
@@ -71,12 +103,11 @@ function App() {
         </div>
         <div className="todos--container">
           <div className="todo--actions-container">
-            {/* <TodoInput handleAddTodo={handleAddTodo} /> */}
-            <TodoSearch />
-            <select className="choose-search-type-select">
-              <option>All</option>
-              <option>Completed</option>
-              <option>Incomplete</option>
+            <TodoSearch handleSearch={handleSearch} />
+            <select className="choose-search-type-select" onChange={(e) => handleFilterTodos(e.target.value)}>
+              <option value="All">All</option>
+              <option value="Completed">Completed</option>
+              <option value="Actives">Incompleted</option>
             </select>
             <button className="theme--change-btn" onClick={changeTheme}>
               <img
@@ -93,21 +124,22 @@ function App() {
           </div>
           {todos.length > 0 && (
             <TodoLists
-              todos={todos}
               active={active}
               filteredArray={filteredArray}
               handleDeleteTodo={handleDeleteTodo}
               handleComplete={handleComplete}
-              clearCompleted={clearCompleted}
-              handleFilterTodos={handleFilterTodos}
+              handleEditOpen={handleEditOpen}
+
             />
           )}
         </div>
         <div className="add-btn-container">
-        <button className="rounded-btn">
-          plus
-        </button>
+          <button className="rounded-btn" onClick={handleClickOpen}>
+            <img src="/images/plus-icon.svg" alt="add note icon" />
+          </button>
         </div>
+        <AddNoteDialog open={open} handleClose={handleClose} handleAddTodo={handleAddTodo} editNote={editNote} handleEditTodo={handleEditTodo} />
+
       </div>
     </div>
   );

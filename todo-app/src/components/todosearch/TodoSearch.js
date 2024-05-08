@@ -1,7 +1,13 @@
 import React, { useState } from 'react'
 import './todosearch.css';
 
-function TodoSearch() {
+function TodoSearch({ handleSearch }) {
+    const [searchText, setSearchText] = useState("");
+
+    const handleChange = (e) => {
+        setSearchText(e.target.value);
+        handleSearch(e.target.value);
+    };
     return (
         <div className='todo--input--container'>
             <input
@@ -9,10 +15,9 @@ function TodoSearch() {
                 type="text"
                 id="todo-input"
                 placeholder="Search Note..."
-                // value={value}    
-                // onChange={(e) => setValue(e.target.value)}
-                // onKeyDown={handleSubmit}
-                />
+                value={searchText}
+                onChange={handleChange}
+            />
         </div>
     )
 }

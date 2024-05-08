@@ -11,21 +11,9 @@ const ThemeProvider = (props) => {
         theme === "dark" ? setTheme("light") : setTheme("dark");
     }
 
-    // const setDark = () => {
-    //     // 2
-    //     setDarkTheme("dark")
-
-    //     // 3
-    //     document.documentElement.setAttribute("data-theme", `${darkTheme}`);
-    // };
-    // const setLight = () => {
-    //     setDarkTheme("light")
-    //     document.documentElement.setAttribute("data-theme", `${darkTheme}`);
-    // };
-    
 
     return (
-        <themeContext.Provider value={{changeTheme, theme}}>
+        <themeContext.Provider value={{ changeTheme, theme }}>
             {props.children}
         </themeContext.Provider>
     )

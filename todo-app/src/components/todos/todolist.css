@@ -4,8 +4,6 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    background-color: var(--card-color);
-    border-radius: 5px;
 }
 .bottom-buttons {
     padding-left: 10px;
@@ -74,24 +72,20 @@
   height: 24px;
   border: 1px solid var(--border-color);
   cursor: pointer;
-  border-radius: 50%;
+  border-radius: 2%;
 }
 .delete--icon {
+    padding: 10px;
+    cursor: pointer;
+}
+.edit--icon {
     padding: 10px;
     cursor: pointer;
 }
 .checkbox--todo:hover {
   border: 1px solid #55DDFF;
 }
-.delete--icon {
-    display: none;
-}
-.todo--card:hover + .delete--icon {
-    display: inline-block;
-}
-.delete--icon:hover {
-    display: inline-block;
-}
+
 .completed--todo {
     background-image: linear-gradient(#55DDFF, #C058F3);
 }

@@ -148,6 +148,9 @@ body {
   align-items: center; 
   cursor: pointer; 
 }
+.rounded-btn:hover {
+  background-color: #5850DD;
+}
 
 
 @media(max-width:900px){
