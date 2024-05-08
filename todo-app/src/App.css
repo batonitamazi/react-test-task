@@ -112,7 +112,7 @@ body {
   font-size: 40px;
   line-height: 40px;
   font-weight: 700;
-  color: #FFFFFF;
+  color: var(--font-color);
 }
 .todos--container {
   display: flex;
@@ -127,7 +127,28 @@ body {
   justify-content: space-between;
   align-items: center;
   flex-direction: row;
+  height: 38px;
 }
+.add-btn-container {
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+.rounded-btn {
+  width: 50px; 
+  height: 50px; 
+  background-color: #6C63FF; 
+  border: none; 
+  border-radius: 50%; 
+  display: flex;
+  color: var(--font-color); 
+  justify-content: center; 
+  align-items: center; 
+  cursor: pointer; 
+}
+
 
 @media(max-width:900px){
   .todo--container {

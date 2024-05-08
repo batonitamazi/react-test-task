@@ -90,7 +90,6 @@ function App() {
                 id="theme-img"
               />
             </button>
-           
           </div>
           {todos.length > 0 && (
             <TodoLists
@@ -103,6 +102,11 @@ function App() {
               handleFilterTodos={handleFilterTodos}
             />
           )}
+        </div>
+        <div className="add-btn-container">
+        <button className="rounded-btn">
+          plus
+        </button>
         </div>
       </div>
     </div>
