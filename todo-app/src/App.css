@@ -10,7 +10,7 @@
   --text-blue: #3A7CFD;
   --card-color: #FFFFFF;
   --deleted-item: #D1D2DA;
-  --border-color: #E3E4F1;
+  --border-color: #6C63FF;
   --deleted-text: #D1D2DA;
 }
 
@@ -22,7 +22,7 @@
   --placeholder-color: #767992;
   --card-color: #25273D;
   --deleted-item: #4D5067;
-  --border-color: #393A4B;
+  --border-color: #F7F7F7;
   --deleted-text: #4D5067;
 
 }
@@ -56,7 +56,38 @@ body {
   cursor: pointer;
   color: var(--font-color);
   border: none;
-  padding: 0px;
+  height: 38px;
+  background-color: #6C63FF;
+  border-radius: 5px;
+  margin-left: 10px;
+}
+.theme--change-btn:hover {
+  background-color: #5850DD;
+}
+.choose-search-type-select {
+  background: none;
+  cursor: pointer;
+  color: var(--font-color);
+  border: none;
+  height: 38px;
+  background-color: #6C63FF;
+  border-radius: 5px;
+  margin-left: 10px;
+  font-size: 18px;
+  font-weight: 500;
+}
+.choose-search-type-select:hover {
+  background-color: #5850DD;
+}
+.choose-search-type-select option {
+  background-color: white;
+  color: #6C63FF;
+  font-size: 16px;
+}
+.choose-search-type-select option:hover {
+  background-color: #6C63FF;
+  color: white;
+  font-size: 16px;
 }
 .todo--container {
   margin-top: 5rem;
@@ -73,7 +104,7 @@ body {
   display: flex;
   width: 100%;
   height: 5%;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
 }
 .todo--title {
@@ -91,14 +122,18 @@ body {
   width: 100%;
   height: 80%;
 }
-
+.todo--actions-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+}
 
 @media(max-width:900px){
   .todo--container {
     height: 80%;
   }
-  .todo--header {
-  }
+  
   .todo--title {
     font-size: 25px;
   }
